@@ -1,86 +1,331 @@
-<!doctype html>
-<html lang="pl">
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Backend działa · WdTB-2026-Backend</title>
-<style>
-  :root { --ink: #141e50; --blue: #006efa; --muted: #5b6685; --line: #d5def0; --bg: #f5f8fd; --tint: #e8f0ff; --ok: #1d7a4c; }
-  * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 "Segoe UI", system-ui, -apple-system, sans-serif; padding: 32px 20px 64px; }
-  main { max-width: 860px; margin: 0 auto; display: grid; gap: 28px; }
-  header { display: grid; gap: 14px; }
-  .logo { height: 60px; width: auto; }
-  h1 { margin: 0; font-size: clamp(28px, 5vw, 42px); line-height: 1.1; }
-  h2 { margin: 0 0 10px; font-size: 20px; }
-  h3 { margin: 18px 0 6px; font-size: 16px; }
-  p { margin: 0; }
-  .status { display: inline-flex; gap: 10px; align-items: center; font-weight: 600; color: var(--ok); }
-  .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px #d6f0e0; }
-  .card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
-  code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .9em; background: var(--tint); padding: 2px 6px; border-radius: 5px; }
-  .btn { display: inline-block; margin-top: 12px; background: var(--blue); color: #fff; text-decoration: none; font-weight: 600; padding: 10px 16px; border-radius: 8px; }
-  .btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
-  table { border-collapse: collapse; width: 100%; margin-top: 10px; font-size: 15px; }
-  td { padding: 6px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
-  td:first-child { color: var(--muted); white-space: nowrap; width: 1%; }
-  ol { margin: 8px 0 0; padding-left: 22px; }
-  li + li { margin-top: 4px; }
-  .muted { color: var(--muted); font-size: 14px; }
-  .project { border: 2px solid var(--blue); }
-  .project .pitch { font-size: 18px; margin-bottom: 6px; }
-  pre { background: var(--tint); border-radius: 8px; padding: 12px 14px; overflow-x: auto; margin: 10px 0 0; font-size: 14px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BoardAF | Board Game Rentals</title>
+
+  <style>
+    :root {
+      --bg: #101018;
+      --card: #1c1c29;
+      --purple: #a78bfa;
+      --text: #f5f5f7;
+      --muted: #a1a1b5;
+      --border: #343447;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 50px;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--purple);
+    }
+
+    .tag {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 55px 0 70px;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 7vw, 64px);
+      margin: 0 0 15px;
+      line-height: 1.1;
+    }
+
+    .hero h1 span {
+      color: var(--purple);
+    }
+
+    .hero p {
+      max-width: 580px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #302746;
+      color: var(--purple);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    section {
+      margin-bottom: 45px;
+    }
+
+    h2 {
+      font-size: 25px;
+      margin-bottom: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .card .icon {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .info {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 25px;
+    }
+
+    .info p {
+      color: var(--muted);
+      margin: 8px 0;
+    }
+
+    .info strong {
+      color: var(--text);
+    }
+
+    .team {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .member {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 20px;
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .member span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .lab {
+      border-left: 3px solid var(--purple);
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      margin-top: 50px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        padding-bottom: 25px;
+      }
+
+      .hero {
+        padding: 35px 0 50px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<main>
-  <header>
-    <img class="logo" src="merito-logo.png" alt="Uniwersytet WSB Merito Wrocław">
-    <span class="status"><span class="dot" aria-hidden="true"></span>Backend działa</span>
-    <h1>Wprowadzenie do technologii backendowych</h1>
-    <p>Tę stronę serwuje Wasza aplikacja Spring Boot z pliku <code>src/main/resources/static/index.html</code>.
-       Na LAB 01 wypełnijcie poniższą wizytówkę projektu. LAB 02 zaczyna się od jej prezentacji:
-       uruchamiacie aplikację i pokazujecie tę stronę.</p>
+<div class="container">
+
+  <nav>
+    <div class="logo">BoardAF 🎲</div>
+    <div class="tag">Backend Project · Group 3</div>
+  </nav>
+
+  <header class="hero">
+    <div class="badge">Board Game Rental System</div>
+
+    <h1>Play more.<br><span>Own less.</span></h1>
+
+    <p>
+      Discover, reserve, and rent board games
+      without having to buy them.
+      BoardAF makes board game rentals simple
+      for players and rental shop owners.
+    </p>
   </header>
 
-  <!-- LAB 01: wizytówka Waszego projektu, na jej podstawie prezentujecie projekt na początku LAB 02.
-       Zastąpcie wszystkie znaczniki „uzupełnij” w nawiasach kwadratowych (reguła R1.04). -->
-  <section class="card project">
-    <h2>[uzupełnij: nazwa projektu]</h2>
-    <p class="pitch">[uzupełnij: jedno zdanie – jaki problem rozwiązuje aplikacja i dla kogo]</p>
-    <table>
-      <tr><td>Autorzy</td><td>[uzupełnij: imiona i nazwiska, grupa]</td></tr>
-      <tr><td>Dla kogo</td><td>[uzupełnij: persona, np. „Anna, właścicielka kawiarni, chce przyjmować rezerwacje stolików online”]</td></tr>
-      <tr><td>Najważniejsze funkcje</td><td>[uzupełnij: 3 funkcje, np. lista stolików, rezerwacja, raport dla właściciela]</td></tr>
-    </table>
-    <h3>Zmiany w projekcie</h3>
-    <ul>
-      <li><b>LAB 01:</b> [uzupełnij: co zmieniliście, np. nazwa projektu, konta zespołu, wizytówka]</li>
-    </ul>
-    <p class="muted">Na kolejnych laboratoriach dopisujcie tu kolejne punkty.</p>
+  <section>
+    <h2>What is BoardAF?</h2>
+    <div class="info">
+      <p>
+        BoardAF is a board game rental management
+        system designed for small rental businesses.
+        It helps customers find available games,
+        make reservations, and rent games for
+        a selected period of time.
+      </p>
+      <p>
+        For business owners, BoardAF simplifies
+        game inventory management, rental tracking,
+        and return monitoring.
+      </p>
+    </div>
   </section>
 
-  <section class="card">
-    <h2>1. Zajrzyjcie do bazy danych</h2>
-    <p>Aplikacja ma wbudowaną bazę H2. Na start jest w niej jedna tabela, <code>user_account</code>, z kontami z pliku <code>data.sql</code>.</p>
-    <table>
-      <tr><td>JDBC URL</td><td><code>jdbc:h2:file:./data/wdtb</code></td></tr>
-      <tr><td>Użytkownik</td><td><code>sa</code></td></tr>
-      <tr><td>Hasło</td><td>(puste)</td></tr>
-    </table>
-    <a class="btn" href="/h2-console">Otwórz konsolę H2</a>
-    <p class="muted" style="margin-top:12px">Spróbujcie zapytania:</p>
-    <pre>SELECT role, COUNT(*) FROM user_account GROUP BY role;</pre>
+  <section>
+    <h2>Core Features</h2>
+
+    <div class="grid">
+      <div class="card">
+        <div class="icon">🎲</div>
+        <h3>Game Catalog</h3>
+        <p>
+          Browse board games and check
+          their current availability.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📅</div>
+        <h3>Reservations</h3>
+        <p>
+          Reserve and rent games
+          for a selected period.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📦</div>
+        <h3>Rental Management</h3>
+        <p>
+          Track active rentals,
+          returns, and rental history.
+        </p>
+      </div>
+    </div>
   </section>
 
-  <section class="card">
-    <h2>2. Przydatne adresy</h2>
-    <table>
-      <tr><td>Konsola bazy</td><td><a href="/h2-console"><code>/h2-console</code></a></td></tr>
-      <tr><td>REST API</td><td><code>/api/…</code> (od LAB 05)</td></tr>
-      <tr><td>Dokumentacja API</td><td><a href="/swagger-ui.html"><code>/swagger-ui.html</code></a> (od LAB 05)</td></tr>
-    </table>
+  <section>
+    <h2>Who is it for?</h2>
+
+    <div class="info">
+      <p>
+        <strong>Meet Michael</strong> – the owner
+        of a small board game rental shop.
+      </p>
+      <p>
+        He wants an easy way to manage his
+        game collection, track rentals,
+        and avoid double bookings.
+      </p>
+      <p>
+        BoardAF also helps customers
+        enjoy different board games
+        without purchasing every title.
+      </p>
+    </div>
   </section>
-</main>
+
+  <section>
+    <h2>Our Team</h2>
+
+    <div class="team">
+      <div class="member">
+        <strong>Tomasz Drochlinski</strong>
+        <span>Group 3</span>
+      </div>
+
+      <div class="member">
+        <strong>Weronika Burzynska</strong>
+        <span>Group 3</span>
+      </div>
+
+      <div class="member">
+        <strong>Zuzia Zajac</strong>
+        <span>Group 3</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Project Progress</h2>
+
+    <div class="info">
+      <div class="lab">
+        <strong>LAB 01 – Project Concept</strong>
+        <p>
+          Selected the BoardAF concept,
+          defined the target audience,
+          identified the main features,
+          and created the project homepage.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    BoardAF © 2026 · Introduction to Backend Technologies
+    <br>
+    WSB Merito University · Group 3
+  </footer>
+
+</div>
 </body>
 </html>
