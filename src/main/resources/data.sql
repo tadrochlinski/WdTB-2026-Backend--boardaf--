@@ -36,11 +36,11 @@ VALUES
 
 -- ===== LAB 02 · reservation (relacje LAB 03) =====
 INSERT INTO reservation
-(reservation_code, customer_name, board_game_id, reserved_on, status)
+(reservation_code, customer_profile_id, board_game_id, reserved_on, status)
 VALUES
-    ('RES-001', 'Jan Kowalski', 1, '2026-11-15', 'PENDING'),
-    ('RES-002', 'Anna Nowak', 2, '2026-11-16', 'CONFIRMED'),
-    ('RES-003', 'Piotr Zielinski', 3, '2026-11-17', 'CANCELLED');
+    ('RES-001', 1, 1, '2026-11-15', 'PENDING'),
+    ('RES-002', 2, 2, '2026-11-16', 'CONFIRMED'),
+    ('RES-003', 3, 3, '2026-11-17', 'CANCELLED');
 
 
 -- ===== LAB 02 · rental (relacje LAB 03) =====
