@@ -1,8 +1,8 @@
-
 package pl.wsb.boardaf.reservation.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import pl.wsb.boardaf.game.entity.BoardGame;
 
 @Entity
 @Table(name = "reservation")
@@ -18,8 +18,9 @@ public class Reservation {
     @Column(nullable = false)
     private String customerName;
 
-    @Column(nullable = false)
-    private String gameTitle;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "board_game_id", nullable = false)
+    private BoardGame boardGame;
 
     @Column(nullable = false)
     private LocalDate reservedOn;
@@ -31,11 +32,11 @@ public class Reservation {
     protected Reservation() {}
 
     public Reservation(String reservationCode, String customerName,
-                       String gameTitle, LocalDate reservedOn,
+                       BoardGame boardGame, LocalDate reservedOn,
                        ReservationStatus status) {
         this.reservationCode = reservationCode;
         this.customerName = customerName;
-        this.gameTitle = gameTitle;
+        this.boardGame = boardGame;
         this.reservedOn = reservedOn;
         this.status = status;
     }
@@ -43,7 +44,7 @@ public class Reservation {
     public Long getId() { return id; }
     public String getReservationCode() { return reservationCode; }
     public String getCustomerName() { return customerName; }
-    public String getGameTitle() { return gameTitle; }
+    public BoardGame getBoardGame() { return boardGame; }
     public LocalDate getReservedOn() { return reservedOn; }
     public ReservationStatus getStatus() { return status; }
 }

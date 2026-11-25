@@ -14,17 +14,6 @@ VALUES
     ('Dixit', 'Rebel', 3, 6, true),
     ('Carcassonne', 'Bard', 2, 5, false);
 
-
-
--- ===== LAB 02 · reservation =====
-INSERT INTO reservation
-(reservation_code, customer_name, game_title, reserved_on, status)
-VALUES
-    ('RES-001', 'Jan Kowalski', 'Catan', '2026-11-15', 'PENDING'),
-    ('RES-002', 'Anna Nowak', 'Dixit', '2026-11-16', 'CONFIRMED'),
-    ('RES-003', 'Piotr Zielinski', 'Carcassonne', '2026-11-17', 'CANCELLED');
-
-
 -- ===== LAB 02 · rental (relacje LAB 03) =====
 INSERT INTO rental
 (rental_code, board_game_id, rented_on, due_on,
@@ -36,3 +25,11 @@ VALUES
      true, 'Anna Nowak', 'anna@example.com'),
     ('RENT-003', 3, '2026-11-12', '2026-11-22',
      false, 'Piotr Zielinski', 'piotr@example.com');
+
+-- ===== LAB 02 · reservation (relacje LAB 03) =====
+INSERT INTO reservation
+(reservation_code, customer_name, board_game_id, reserved_on, status)
+VALUES
+    ('RES-001', 'Jan Kowalski', 1, '2026-11-15', 'PENDING'),
+    ('RES-002', 'Anna Nowak', 2, '2026-11-16', 'CONFIRMED'),
+    ('RES-003', 'Piotr Zielinski', 3, '2026-11-17', 'CANCELLED');
