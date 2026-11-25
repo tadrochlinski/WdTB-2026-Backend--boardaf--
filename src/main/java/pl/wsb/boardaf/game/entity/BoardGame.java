@@ -1,7 +1,9 @@
-
 package pl.wsb.boardaf.game.entity;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import pl.wsb.boardaf.rental.entity.Rental;
 
 @Entity
 @Table(name = "board_game")
@@ -26,6 +28,9 @@ public class BoardGame {
     @Column(nullable = false)
     private Boolean available;
 
+    @OneToMany(mappedBy = "boardGame", fetch = FetchType.LAZY)
+    private List<Rental> rentals = new ArrayList<>();
+
     protected BoardGame() {}
 
     public BoardGame(String title, String publisher,
@@ -44,4 +49,5 @@ public class BoardGame {
     public Integer getMinPlayers() { return minPlayers; }
     public Integer getMaxPlayers() { return maxPlayers; }
     public Boolean getAvailable() { return available; }
+    public List<Rental> getRentals() { return rentals; }
 }
