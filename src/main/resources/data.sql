@@ -34,6 +34,27 @@ VALUES
     ('Carcassonne', 'Bard', 2, 5, false);
 
 
+-- ===== LAB 03 · category =====
+INSERT INTO category
+(name, slug, description, active)
+VALUES
+    ('Strategy', 'strategy', 'Games focused on planning and strategic decisions', true),
+    ('Family', 'family', 'Games suitable for families', true),
+    ('Party', 'party', 'Social games for groups of friends', true);
+
+
+-- ===== LAB 03 · board_game_category =====
+INSERT INTO board_game_category
+(board_game_id, category_id)
+VALUES
+    (1, 1),
+    (1, 2),
+    (2, 2),
+    (2, 3),
+    (3, 1),
+    (3, 2);
+
+
 -- ===== LAB 02 · reservation (relacje LAB 03) =====
 INSERT INTO reservation
 (reservation_code, customer_profile_id, board_game_id, reserved_on, status)
@@ -45,12 +66,12 @@ VALUES
 
 -- ===== LAB 02 · rental (relacje LAB 03) =====
 INSERT INTO rental
-(rental_code, board_game_id, rented_on, due_on,
- returned, customer_name, customer_email)
+(rental_code, board_game_id, customer_profile_id,
+ rented_on, due_on, returned, customer_name, customer_email)
 VALUES
-    ('RENT-001', 1, '2026-11-10', '2026-11-20',
+    ('RENT-001', 1, 1, '2026-11-10', '2026-11-20',
      false, 'Jan Kowalski', 'jan@example.com'),
-    ('RENT-002', 2, '2026-11-05', '2026-11-15',
+    ('RENT-002', 2, 2, '2026-11-05', '2026-11-15',
      true, 'Anna Nowak', 'anna@example.com'),
-    ('RENT-003', 3, '2026-11-12', '2026-11-22',
+    ('RENT-003', 3, 3, '2026-11-12', '2026-11-22',
      false, 'Piotr Zielinski', 'piotr@example.com');

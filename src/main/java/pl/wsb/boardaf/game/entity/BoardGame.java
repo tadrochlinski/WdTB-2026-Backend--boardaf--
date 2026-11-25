@@ -3,6 +3,8 @@ package pl.wsb.boardaf.game.entity;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import pl.wsb.boardaf.rental.entity.Rental;
 
 @Entity
@@ -31,6 +33,14 @@ public class BoardGame {
     @OneToMany(mappedBy = "boardGame", fetch = FetchType.LAZY)
     private List<Rental> rentals = new ArrayList<>();
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "board_game_category",
+        joinColumns = @JoinColumn(name = "board_game_id"),
+        inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<Category> categories = new HashSet<>();
+
     protected BoardGame() {}
 
     public BoardGame(String title, String publisher,
@@ -50,4 +60,5 @@ public class BoardGame {
     public Integer getMaxPlayers() { return maxPlayers; }
     public Boolean getAvailable() { return available; }
     public List<Rental> getRentals() { return rentals; }
+    public Set<Category> getCategories() { return categories; }
 }
