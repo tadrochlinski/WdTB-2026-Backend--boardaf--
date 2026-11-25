@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,14 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BoardAF | Board Game Rentals</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg: #101018;
-      --card: #1c1c29;
-      --purple: #a78bfa;
-      --text: #f5f5f7;
-      --muted: #a1a1b5;
-      --border: #343447;
+      --blue: #058FF7;
+      --periwinkle: #A7C3F9;
+      --ice: #E0F1FF;
+      --sand: #C5A775;
+      --bg: var(--ice);
+      --card: #ffffff;
+      --text: #172c42;
+      --muted: #465c72;
+      --accent-text: #005da6;
+      --border: #c8dcef;
+      --shadow: 0 8px 28px rgba(23, 44, 66, 0.05);
     }
 
     * {
@@ -24,96 +32,139 @@
       margin: 0;
       background: var(--bg);
       color: var(--text);
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
+      font-family: 'Manrope', 'Segoe UI', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
     }
 
     .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 30px 20px;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 28px 24px 0;
     }
 
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 50px;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 0 0 20px;
+      border-bottom: 1px solid var(--border);
     }
 
     .logo {
-      font-size: 26px;
+      font-size: 28px;
       font-weight: 800;
-      color: var(--purple);
+      letter-spacing: -1.5px;
+      color: var(--text);
+    }
+
+    .logo::after {
+      content: '';
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      margin-left: 5px;
+      border-radius: 2px;
+      background: var(--blue);
     }
 
     .tag {
       color: var(--muted);
-      font-size: 13px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
     }
 
     .hero {
       text-align: center;
-      padding: 55px 0 70px;
+      padding: clamp(48px, 8vw, 88px) 22px;
+      margin: 26px 0 48px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--blue);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
     }
 
     .hero h1 {
-      font-size: clamp(38px, 7vw, 64px);
-      margin: 0 0 15px;
-      line-height: 1.1;
+      font-size: clamp(44px, 8vw, 78px);
+      font-weight: 800;
+      letter-spacing: -0.055em;
+      margin: 0 0 22px;
+      line-height: 1.04;
     }
 
     .hero h1 span {
-      color: var(--purple);
+      color: var(--accent-text);
     }
 
     .hero p {
-      max-width: 580px;
-      margin: auto;
+      max-width: 570px;
+      margin: 0 auto;
       color: var(--muted);
-      font-size: 17px;
+      font-size: clamp(15px, 2vw, 17px);
     }
 
     .badge {
       display: inline-block;
-      background: #302746;
-      color: var(--purple);
-      border-radius: 20px;
-      padding: 6px 14px;
-      font-size: 13px;
-      margin-bottom: 22px;
+      background: var(--sand);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 7px 16px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.075em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
     }
 
     section {
-      margin-bottom: 45px;
+      margin-bottom: 40px;
     }
 
     h2 {
-      font-size: 25px;
-      margin-bottom: 18px;
+      font-size: clamp(23px, 4vw, 28px);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.3;
+      margin: 0 0 18px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
     }
 
-    .card {
+    .card, .info, .member {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 24px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
     }
 
-    .card .icon {
-      font-size: 30px;
-      margin-bottom: 12px;
+    .card {
+      padding: 26px;
+      border-top: 4px solid var(--blue);
+    }
+
+    .card:nth-child(2) {
+      border-top-color: var(--periwinkle);
+    }
+
+    .card:nth-child(3) {
+      border-top-color: var(--sand);
     }
 
     .card h3 {
       margin: 0 0 10px;
       font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.4;
     }
 
     .card p {
@@ -123,68 +174,120 @@
     }
 
     .info {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 25px;
+      padding: 26px 30px;
     }
 
     .info p {
       color: var(--muted);
-      margin: 8px 0;
+      margin: 0 0 12px;
+    }
+
+    .info p:last-child {
+      margin-bottom: 0;
     }
 
     .info strong {
       color: var(--text);
+      font-weight: 800;
     }
 
     .team {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
     }
 
     .member {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 20px;
-      flex: 1;
-      min-width: 180px;
+      padding: 20px 24px;
+      border-left: 4px solid var(--periwinkle);
+    }
+
+    .member strong {
+      font-weight: 800;
     }
 
     .member span {
       display: block;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 5px;
+    }
+
+    .progress {
+      display: grid;
+      gap: 16px;
     }
 
     .lab {
-      border-left: 3px solid var(--purple);
-      padding-left: 20px;
-      color: var(--muted);
+      border-left: 4px solid var(--periwinkle);
+      padding: 18px 20px;
+      background: #f5faff;
+      border-radius: 0 12px 12px 0;
+    }
+
+    .lab:last-child {
+      border-left-color: var(--blue);
+      background: var(--ice);
+    }
+
+    .lab h3 {
+      color: var(--text);
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.4;
+      margin: 0 0 10px;
+    }
+
+    .lab p {
+      font-size: 14px;
+    }
+
+    .lab .test-result {
+      display: inline-block;
+      background: var(--periwinkle);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 800;
+      padding: 6px 12px;
+      border-radius: 6px;
+      margin: 2px 0 0;
     }
 
     footer {
       text-align: center;
-      padding: 30px 0;
-      margin-top: 50px;
+      padding: 28px 0 34px;
+      margin-top: 48px;
       border-top: 1px solid var(--border);
       color: var(--muted);
-      font-size: 13px;
+      font-size: 12px;
     }
 
     @media (max-width: 700px) {
-      .grid {
+      .container {
+        padding: 20px 16px 0;
+      }
+
+      .grid, .team {
         grid-template-columns: 1fr;
       }
 
-      nav {
-        padding-bottom: 25px;
+      .hero {
+        margin: 20px 0 34px;
+        padding: 46px 20px;
+        border-radius: 18px;
       }
 
-      .hero {
-        padding: 35px 0 50px;
+      section {
+        margin-bottom: 32px;
+      }
+
+      .card, .info, .member {
+        padding: 20px;
+      }
+
+      .lab {
+        padding: 16px;
       }
     }
   </style>
@@ -194,12 +297,11 @@
 <div class="container">
 
   <nav>
-    <div class="logo">BoardAF 🎲</div>
+    <div class="logo">BoardAF</div>
     <div class="tag">Backend Project · Group 3</div>
   </nav>
 
   <header class="hero">
-    <div class="badge">Board Game Rental System</div>
 
     <h1>Play more.<br><span>Own less.</span></h1>
 
@@ -234,7 +336,6 @@
 
     <div class="grid">
       <div class="card">
-        <div class="icon">🎲</div>
         <h3>Game Catalog</h3>
         <p>
           Browse board games and check
@@ -243,7 +344,6 @@
       </div>
 
       <div class="card">
-        <div class="icon">📅</div>
         <h3>Reservations</h3>
         <p>
           Reserve and rent games
@@ -252,7 +352,6 @@
       </div>
 
       <div class="card">
-        <div class="icon">📦</div>
         <h3>Rental Management</h3>
         <p>
           Track active rentals,
@@ -307,14 +406,40 @@
   <section>
     <h2>Project Progress</h2>
 
-    <div class="info">
+    <div class="info progress">
       <div class="lab">
-        <strong>LAB 01 – Project Concept</strong>
+        <h3>LAB 01 – Project Concept</h3>
         <p>
-          Selected the BoardAF concept,
-          defined the target audience,
-          identified the main features,
-          and created the project homepage.
+          Defined the project concept, business objectives,
+          target users and core functionalities of BoardAF.
+          Configured the Spring Boot project and GitHub repository.
+        </p>
+      </div>
+
+      <div class="lab">
+        <h3>LAB 02 – Entities and Database</h3>
+        <p>
+          Implemented the initial JPA entities, enumerations
+          and embedded contact information. Configured the H2
+          database and prepared initial sample data.
+        </p>
+      </div>
+
+      <div class="lab">
+        <h3>LAB 03 – Entity Relationships and Repositories</h3>
+        <p>
+          Extended the database model with customer profiles
+          and board game categories. Implemented ManyToOne,
+          OneToMany, OneToOne and ManyToMany relationships,
+          foreign keys and lazy loading.
+        </p>
+        <p>
+          Created a Spring Data JPA repository with a derived
+          query through an entity relationship and generated
+          the database schema documentation.
+        </p>
+        <p class="test-result">
+          All 33 automated project tests passed successfully.
         </p>
       </div>
     </div>
